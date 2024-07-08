@@ -5,9 +5,9 @@ services:
   app:
     user: "${USER_ID:-1000}"
     hostname: "${HOST_NAME:-abhishek}"
-    image: abhishek-template
+    image: abhishek-data
     platform: linux/amd64
-    container_name: abhishek-template-container
+    container_name: abhishek-data-container
     build:
       context: .
       dockerfile: ./docker/Dockerfile
@@ -16,17 +16,10 @@ services:
         USER_ID: "${USER_ID:-1000}"
     volumes:
       - ./:/app/
-      - ~/.config/gcloud/:/home/${USER_NAME:-abhi}/.config/gcloud
+      - ~/.config/gcloud/:/home/${USER_NAME}/.config/gcloud
+      - ~/.ssh:/home/${USER_NAME}/.ssh
     ports:
-      - 8080:8080
-
-    # deploy:
-    #   resources:
-    #     reservations:
-    #       devices:
-    #         - driver: nvidia
-    #           count: all
-    #           capabilities: [gpu]
+      - 8888:8888
     ipc: host
     init: true
 

@@ -13,7 +13,7 @@ else
 endif
 
 SERVICE_NAME = app
-CONTAINER_NAME = abhishek-template-container
+CONTAINER_NAME = abhishek-data-container
 
 DIRS_TO_VALIDATE = abhishek
 DOCKER_COMPOSE_RUN = $(DOCKER_COMPOSE_COMMAND) run --rm $(SERVICE_NAME)
@@ -26,9 +26,9 @@ export
 guard-%:
 	@#$(or ${$*}, $(error $* is not set))
 
-## Call entrypoint
-entrypoint: up
-	$(DOCKER_COMPOSE_EXEC) python ./abhishek/entrypoint.py
+## Version data
+version-data: up
+	$(DOCKER_COMPOSE_EXEC) python ./abhishek/version_data.py
 
 ## Starts jupyter lab
 notebook: up
